@@ -1,0 +1,23 @@
+<!-- fxLayout es parte del módulo Flex Layout. Define la distribución
+de los objetos almacenados dentro: 
+"column" = organizará cada uno de los elementos de forma vertical
+"row" = organizará cada uno de los elementos de forma horizontal -->
+
+<!-- fxLayoutGap define la distancia de separación entre cada elemento -->
+<div class="container" fxLayout="column" fxLayoutGap='10px'>
+  <!-- fxFlex es la forma de definir un elemento, para ser distribuido
+  por el Flex Layout -->
+  <mat-list fxFlex>
+    <!-- el atributo *ngFor es una estructura directiva por parte
+    de Angular, que permite iterar elementos dentro de un arreglo -->
+    <!-- "let dish of dishes" es como un for loop, donde dish será la
+    variable que se estará cambiando de acuerdo a el array dishes-->
+    <mat-list-item *ngFor="let dish of dishes">
+      <img matListAvatar src={{dish.image}} alt={{dish.name}}>
+      <h1 matLine>{{dish.name}}</h1>
+      <p matLine>
+        <span>{{dish.description}}</span>
+      </p>
+    </mat-list-item>
+  </mat-list>
+</div>
