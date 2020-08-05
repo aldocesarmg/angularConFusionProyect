@@ -20,7 +20,7 @@ por el Flex Layout -->
     de Angular, que permite iterar elementos dentro de un arreglo -->
     <!-- "let dish of dishes" es como un for loop, donde dish será la
     variable que se estará cambiando de acuerdo a el array dishes-->
-    <mat-grid-tile *ngFor="let dish of dishes" (click)="onSelect(dish)">
+    <mat-grid-tile *ngFor="let dish of dishes" [routerLink]="['/dishdetail', dish.id]">
       <img height="200px" src={{dish.image}} alt={{dish.name}}>
       <mat-grid-tile-footer>
         <h1 matLine>{{dish.name | uppercase}}</h1>
@@ -29,9 +29,10 @@ por el Flex Layout -->
   </mat-grid-list>
 </div>
 
+<!-- 
 <app-dishdetail [dish] = "selectedDish"></app-dishdetail>
 
-<!-- EMPIEZA CÓDIGO
+EMPIEZA CÓDIGO
 <div fxFlex *ngIf="selectedDish">
   <mat-card>
     <mat-card-header>
