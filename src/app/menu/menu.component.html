@@ -14,7 +14,7 @@ por el Flex Layout -->
   </div>
 </div>
 
-<div fxFlex>
+<div fxFlex *ngIf="dishes">
   <mat-grid-list cols="2" rowHeight="200px">
     <!-- el atributo *ngFor es una estructura directiva por parte
     de Angular, que permite iterar elementos dentro de un arreglo -->
@@ -27,6 +27,9 @@ por el Flex Layout -->
       </mat-grid-tile-footer>
     </mat-grid-tile>
   </mat-grid-list>
+</div>
+<div fxFlex [hidden]="dishes">
+  <mat-spinner></mat-spinner> <h4>Loading ... Please wait </h4>
 </div>
 
 <!-- 
