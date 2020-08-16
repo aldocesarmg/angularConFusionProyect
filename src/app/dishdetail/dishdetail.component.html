@@ -3,9 +3,13 @@
     fxLayout.sm="column"
     fxLayout.xs="column"
     fxLayoutAlign.gt-md="space-around center"
-    fxLayoutGap="10px" 
+    fxLayoutGap="0px" 
     fxLayoutGap.xs="0">
 
+  <div fxFlex [hidden]="dish">
+    <mat-spinner></mat-spinner> <h4>Loading ... Please wait </h4>
+  </div>
+  
   <div fxFlex="40" *ngIf="dish">
     <mat-card>
       <mat-card-header>
@@ -32,9 +36,7 @@
     </mat-card>
   </div>
 
-  <div fxFlex [hidden]="dish">
-    <mat-spinner></mat-spinner> <h4>Loading ... Please wait </h4>
-  </div>
+  
 
   <div fxFlex="40" *ngIf="dish">
     <mat-list>
@@ -46,7 +48,46 @@
           <span> -- {{dish.author}} {{dish.date | date}}</span>
         </p>
       </mat-list-item>
+      <h4 matLine>Preview</h4>
+      <mat-list-item *ngIf="!commentForm.invalid">
+        <h4 matLine>{{ newComment.author }}</h4>
+        <p matLine>{{newComment.rating}} Stars</p>
+        <p matLine>
+          <span> -- {{ newComment.comment }}</span>
+        </p>
+      </mat-list-item>
+      <hr>
+      <div>
+        <form novalidate [formGroup]="commentForm" #cform="ngForm" (ngSubmit)="onSubmit()">
+          <p>
+            <mat-form-field style="width: 100%;">
+              <input matInput formControlName="author" placeholder="Name" 
+              type="text" required>
+            </mat-form-field>
+            <mat-error *ngIf="formErrors.author">
+              {{ formErrors.author }}
+            </mat-error>
+          </p>
+          <p>
+            <label>Rating:</label>
+            <mat-slider matInput formControlName="rating" min="0" max="5" step="1" value="5" tickInterval="1" 
+            thumbLabel style="width: 50%;"></mat-slider>
+          </p>
+          <p>
+            <mat-form-field style="width: 100%;">
+              <textarea matInput formControlName="comment" placeholder="Your comment" 
+              rows="12" type="text" required></textarea>
+            </mat-form-field>
+            <mat-error *ngIf="formErrors.comment">
+              {{ formErrors.comment }}
+            </mat-error>
+          </p>
+          <button type="submit" mat-button class="background-primary text-floral-white"
+          [disabled]="commentForm.invalid">Submit</button>
+        </form>
+      </div>
     </mat-list>
   </div>
-
+  
+  
 </div>
